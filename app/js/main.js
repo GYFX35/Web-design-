@@ -204,8 +204,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const servicesGrid = document.getElementById('servicesGrid');
     const opportunitiesList = document.getElementById('opportunitiesList');
     const toolsList = document.getElementById('toolsList');
+    const unAgenciesTableBody = document.querySelector('#unAgenciesTable tbody');
+    const globalProgramsList = document.getElementById('globalProgramsList');
 
-    if (posTableBody || itsmTableBody || githubReposDiv || googleServicesDiv || servicesGrid || opportunitiesList || toolsList) {
+    if (posTableBody || itsmTableBody || githubReposDiv || googleServicesDiv || servicesGrid || opportunitiesList || toolsList || unAgenciesTableBody || globalProgramsList) {
         const fetchIntegrations = async () => {
             try {
                 // Fetch Freelance Opportunities
@@ -370,6 +372,74 @@ document.addEventListener('DOMContentLoaded', function() {
                             row.cells[2].querySelector('span').textContent = item.status;
                             row.cells[3].textContent = item.last_sync;
                             itsmTableBody.appendChild(row);
+                        });
+                    }
+                }
+
+                // Fetch UN Agencies data
+                if (unAgenciesTableBody) {
+                    const unResponse = await fetch('http://localhost:8000/integrations/un-agencies');
+                    if (unResponse.ok) {
+                        const data = await unResponse.json();
+                        unAgenciesTableBody.innerHTML = '';
+                        data.agencies.forEach(item => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td><strong></strong></td>
+                                <td></td>
+                                <td></td>
+                                <td><span class="status healthy"></span></td>
+                            `;
+                            const nameLink = document.createElement('a');
+                            nameLink.href = item.link || '#';
+                            nameLink.target = '_blank';
+                            nameLink.textContent = item.name;
+                            row.cells[0].querySelector('strong').appendChild(nameLink);
+
+                            row.cells[1].textContent = item.indicator;
+                            row.cells[2].textContent = item.last_value;
+                            row.cells[3].querySelector('span').textContent = item.status;
+                            unAgenciesTableBody.appendChild(row);
+                        });
+                    }
+                }
+
+                // Fetch Global Programs
+                if (globalProgramsList) {
+                    const globalResponse = await fetch('http://localhost:8000/global/opportunities');
+                    if (globalResponse.ok) {
+                        const data = await globalResponse.json();
+                        globalProgramsList.innerHTML = '';
+                        data.programs.forEach(prog => {
+                            const card = document.createElement('div');
+                            card.className = 'opportunity-card';
+                            card.style.borderLeftColor = '#27ae60';
+
+                            const org = document.createElement('div');
+                            org.className = 'skill-tag';
+                            org.style.background = '#e1f5fe';
+                            org.style.color = '#0288d1';
+                            org.style.marginBottom = '10px';
+                            org.textContent = prog.organization;
+                            card.appendChild(org);
+
+                            const title = document.createElement('h3');
+                            title.textContent = prog.title;
+                            card.appendChild(title);
+
+                            const meta = document.createElement('div');
+                            meta.className = 'meta';
+                            meta.innerHTML = `<span>🌍 ${prog.region}</span> <span>🎯 ${prog.focus}</span> <span>💰 ${prog.budget}</span>`;
+                            card.appendChild(meta);
+
+                            const btn = document.createElement('button');
+                            btn.className = 'apply-btn';
+                            btn.style.background = '#27ae60';
+                            btn.textContent = 'View Details';
+                            btn.onclick = () => window.open(prog.link || 'https://open.undp.org', '_blank');
+                            card.appendChild(btn);
+
+                            globalProgramsList.appendChild(card);
                         });
                     }
                 }
