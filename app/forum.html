@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Forum - IT Suite</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .forum-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+        }
+        .discussion-list {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .topic-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .topic-item:last-child {
+            border-bottom: none;
+        }
+        .topic-info h4 {
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+        .topic-meta {
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+        .topic-category {
+            background: #e1f5fe;
+            color: #0288d1;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            margin-right: 8px;
+        }
+        .submission-form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-top: 25px;
+        }
+        .submission-form h3 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .submit-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">IT Suite</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="ops.html">IT Operations</a></li>
+                <li><a href="projects.html">Project Management</a></li>
+                <li><a href="security.html">Cybersecurity</a></li>
+                <li><a href="ai-assistant.html">AI Assistant</a></li>
+                <li class="active"><a href="forum.html">Global Forum</a></li>
+                <li><a href="integrations.html">Professional Tools</a></li>
+                <li><a href="services.html">Services Marketplace</a></li>
+                <li><a href="funding.html">Sponsorship & Funding</a></li>
+                <li><a href="freelance.html">Freelance Portal</a></li>
+                <li><a href="global-opportunities.html">Global Opportunities</a></li>
+            </ul>
+        </nav>
+    </div>
+    <main>
+        <header>
+            <h1>Global Tech Forum</h1>
+            <div class="user-profile">Community Member</div>
+        </header>
+
+        <div class="forum-layout">
+            <div class="main-content">
+                <section class="discussion-list">
+                    <h3>Recent Discussions</h3>
+                    <div id="forumTopics">
+                        <!-- Loaded dynamically -->
+                    </div>
+                </section>
+
+                <section class="submission-form">
+                    <h3>Client Project Submission</h3>
+                    <p style="margin-bottom: 15px; font-size: 14px; color: #7f8c8d;">Submit your project proposal for global tech collaboration and partnership.</p>
+                    <form id="clientSubmissionForm">
+                        <div class="form-group">
+                            <label for="clientName">Organization / Client Name</label>
+                            <input type="text" id="clientName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="projectType">Project Type</label>
+                            <select id="projectType">
+                                <option value="Digital Transformation">Digital Transformation</option>
+                                <option value="Infrastructure Development">Infrastructure Development</option>
+                                <option value="Cybersecurity Initiative">Cybersecurity Initiative</option>
+                                <option value="Capacity Building">Capacity Building</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Project Description</label>
+                            <textarea id="description" rows="4" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="budget">Estimated Budget</label>
+                            <input type="text" id="budget" placeholder="e.g. $50k - $100k">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Contact Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <button type="submit" class="submit-btn">Submit Proposal</button>
+                    </form>
+                </section>
+            </div>
+
+            <aside class="forum-sidebar">
+                <div class="ai-container" style="height: 500px;">
+                    <div style="padding: 15px; border-bottom: 1px solid #eee; background: #34495e; color: white; border-radius: 8px 8px 0 0;">
+                        <strong>Forum Bot</strong> - Global Tech Expert
+                    </div>
+                    <div class="chat-messages" id="forumChatMessages">
+                        <div class="message ai">
+                            <div class="chat-bubble">
+                                Welcome to the Global Tech Forum! I'm here to help you find partners and discuss international tech development. How can I assist you today?
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="forumChatInput" placeholder="Ask about partnerships or global tech...">
+                        <button id="forumSendButton">Send</button>
+                    </div>
+                </div>
+
+                <div class="stat-card" style="margin-top: 25px;">
+                    <h3>Forum Statistics</h3>
+                    <p>Members: 1,240</p>
+                    <p>Active Partnerships: 15</p>
+                    <p>Global Projects: 32</p>
+                </div>
+            </aside>
+        </div>
+    </main>
+    <script src="js/main.js"></script>
+</body>
+</html>

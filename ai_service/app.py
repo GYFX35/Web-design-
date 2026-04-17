@@ -24,6 +24,17 @@ class Query(BaseModel):
     prompt: str
     provider: str = "ollama"  # or "google"
 
+class ForumQuery(BaseModel):
+    prompt: str
+    context: str = "general"
+
+class ClientSubmission(BaseModel):
+    client_name: str
+    project_type: str
+    description: str
+    budget: str
+    email: str
+
 @app.get("/")
 async def root():
     return {"message": "AI Service is running"}
@@ -329,6 +340,53 @@ async def ask(query: Query):
             raise HTTPException(status_code=400, detail="Unsupported provider")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/forum/topics")
+async def get_forum_topics():
+    return {
+        "topics": [
+            {"id": 1, "title": "Global Tech Partnerships in Africa", "author": "Dr. Aris", "replies": 24, "category": "Partnerships"},
+            {"id": 2, "title": "Scaling Open Source for UN SDGs", "author": "OpenTech Lead", "replies": 15, "category": "Global Development"},
+            {"id": 3, "title": "Cybersecurity Standards for International Collab", "author": "SecurityExpert", "replies": 42, "category": "Cybersecurity"},
+            {"id": 4, "title": "IT Workforce development in SE Asia", "author": "GlobalDev", "replies": 10, "category": "Development"}
+        ]
+    }
+
+@app.post("/forum/ask")
+async def forum_ask(query: ForumQuery):
+    try:
+        system_prompt = (
+            "You are the Global Tech Forum Bot. Your goal is to facilitate discussions between IT professionals, "
+            "encourage global tech collaborations, and provide insights into international tech development projects. "
+            "Focus on partnerships, digital inclusion, and professional growth in the tech sector."
+        )
+
+        full_prompt = f"{system_prompt}\n\nContext: {query.context}\nUser: {query.prompt}"
+
+        # Defaulting to Ollama for the forum bot
+        ollama_base_url = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
+        try:
+            llm = ChatOllama(base_url=ollama_base_url, model="llama3")
+            response = llm.invoke([HumanMessage(content=full_prompt)])
+            return {"response": response.content}
+        except Exception:
+            # Fallback mock response if Ollama is not available
+            return {
+                "response": f"I've analyzed your query about '{query.prompt}'. In the context of {query.context}, "
+                            f"this is a critical area for global tech collaboration. Many international organizations "
+                            f"are looking for partnerships in this space."
+            }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/forum/submit")
+async def forum_submit(submission: ClientSubmission):
+    # In a real app, this would save to a database
+    return {
+        "status": "success",
+        "message": f"Submission received from {submission.client_name}. Our partnership team will review your {submission.project_type} project shortly.",
+        "submission_id": "SUB-12345"
+    }
 
 if __name__ == "__main__":
     import uvicorn

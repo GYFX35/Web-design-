@@ -196,6 +196,126 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Forum Page Logic
+    const forumTopicsDiv = document.getElementById('forumTopics');
+    const forumChatMessages = document.getElementById('forumChatMessages');
+    const forumChatInput = document.getElementById('forumChatInput');
+    const forumSendButton = document.getElementById('forumSendButton');
+    const clientSubmissionForm = document.getElementById('clientSubmissionForm');
+
+    if (forumTopicsDiv || forumChatMessages || clientSubmissionForm) {
+        const fetchForumData = async () => {
+            if (forumTopicsDiv) {
+                try {
+                    const response = await fetch('http://localhost:8000/forum/topics');
+                    if (response.ok) {
+                        const data = await response.json();
+                        forumTopicsDiv.innerHTML = '';
+                        data.topics.forEach(topic => {
+                            const item = document.createElement('div');
+                            item.className = 'topic-item';
+                            item.innerHTML = `
+                                <div class="topic-info">
+                                    <h4>${topic.title}</h4>
+                                    <div class="topic-meta">
+                                        <span class="topic-category">${topic.category}</span>
+                                        By ${topic.author} | ${topic.replies} replies
+                                    </div>
+                                </div>
+                                <button class="apply-btn" style="margin-top: 0; padding: 5px 15px;">View</button>
+                            `;
+                            forumTopicsDiv.appendChild(item);
+                        });
+                    }
+                } catch (error) {
+                    console.error('Error fetching forum topics:', error);
+                }
+            }
+        };
+
+        const appendForumMessage = (text, sender) => {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', sender);
+            const bubbleDiv = document.createElement('div');
+            bubbleDiv.classList.add('chat-bubble');
+            bubbleDiv.textContent = text;
+            messageDiv.appendChild(bubbleDiv);
+            forumChatMessages.appendChild(messageDiv);
+            forumChatMessages.scrollTop = forumChatMessages.scrollHeight;
+        };
+
+        const handleForumSend = async () => {
+            const prompt = forumChatInput.value.trim();
+            if (!prompt) return;
+
+            appendForumMessage(prompt, 'user');
+            forumChatInput.value = '';
+
+            try {
+                const response = await fetch('http://localhost:8000/forum/ask', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ prompt: prompt, context: 'forum' }),
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    appendForumMessage(data.response, 'ai');
+                } else {
+                    appendForumMessage('Error: Could not connect to the forum bot.', 'ai');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                appendForumMessage('Error: Failed to fetch response from forum bot.', 'ai');
+            }
+        };
+
+        if (forumSendButton && forumChatInput) {
+            forumSendButton.addEventListener('click', handleForumSend);
+            forumChatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') handleForumSend();
+            });
+        }
+
+        if (clientSubmissionForm) {
+            clientSubmissionForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const submission = {
+                    client_name: document.getElementById('clientName').value,
+                    project_type: document.getElementById('projectType').value,
+                    description: document.getElementById('description').value,
+                    budget: document.getElementById('budget').value,
+                    email: document.getElementById('email').value
+                };
+
+                try {
+                    const response = await fetch('http://localhost:8000/forum/submit', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(submission),
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        alert(data.message);
+                        clientSubmissionForm.reset();
+                    } else {
+                        alert('Error submitting proposal. Please try again.');
+                    }
+                } catch (error) {
+                    console.error('Error submitting proposal:', error);
+                    alert('Error: Failed to connect to the server.');
+                }
+            });
+        }
+
+        fetchForumData();
+    }
+
     // Integrations & Freelance Page Logic
     const posTableBody = document.querySelector('#posTable tbody');
     const itsmTableBody = document.querySelector('#itsmTable tbody');
