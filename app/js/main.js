@@ -198,10 +198,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Integrations Page Logic
     const posTableBody = document.querySelector('#posTable tbody');
+    const itsmTableBody = document.querySelector('#itsmTable tbody');
     const githubReposDiv = document.getElementById('githubRepos');
     const googleServicesDiv = document.getElementById('googleServices');
+    const servicesGrid = document.getElementById('servicesGrid');
 
-    if (posTableBody || githubReposDiv || googleServicesDiv) {
+    if (posTableBody || itsmTableBody || githubReposDiv || googleServicesDiv || servicesGrid) {
         const fetchIntegrations = async () => {
             try {
                 // Fetch POS data
@@ -253,6 +255,47 @@ document.addEventListener('DOMContentLoaded', function() {
                         googleServicesDiv.appendChild(div);
                     });
                     document.getElementById('googleStatus').textContent = data.status;
+                }
+
+                // Fetch ITSM data
+                if (itsmTableBody) {
+                    const itsmResponse = await fetch('http://localhost:8000/integrations/itsm');
+                    if (itsmResponse.ok) {
+                        const data = await itsmResponse.json();
+                        itsmTableBody.innerHTML = '';
+                        data.integrations.forEach(item => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td><strong>${item.name}</strong></td>
+                                <td>${item.type}</td>
+                                <td><span class="status healthy">${item.status}</span></td>
+                                <td>${item.last_sync}</td>
+                            `;
+                            itsmTableBody.appendChild(row);
+                        });
+                    }
+                }
+
+                // Fetch Premium Services data
+                if (servicesGrid) {
+                    const servicesResponse = await fetch('http://localhost:8000/services/premium');
+                    if (servicesResponse.ok) {
+                        const data = await servicesResponse.json();
+                        servicesGrid.innerHTML = '';
+                        data.services.forEach(service => {
+                            const card = document.createElement('div');
+                            card.className = 'service-card';
+                            card.innerHTML = `
+                                <div class="premium-badge">PREMIUM</div>
+                                <div class="category">${service.category}</div>
+                                <h3>${service.name}</h3>
+                                <p>${service.description}</p>
+                                <div class="price-tag">${service.price} <span>/ ${service.period}</span></div>
+                                <button class="purchase-btn" onclick="alert('Purchase flow for ${service.name} would start here.')">Get Started</button>
+                            `;
+                            servicesGrid.appendChild(card);
+                        });
+                    }
                 }
             } catch (error) {
                 console.error('Error fetching integration data:', error);
