@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services Marketplace - IT Suite</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        .service-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+        }
+        .service-card .premium-badge {
+            position: absolute;
+            top: 15px;
+            right: -35px;
+            background: #f1c40f;
+            color: #2c3e50;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-size: 12px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .service-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        .service-card .category {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #3498db;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        .service-card p {
+            color: #7f8c8d;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        .service-card .price-tag {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .service-card .price-tag span {
+            font-size: 14px;
+            color: #95a5a6;
+            font-weight: normal;
+        }
+        .purchase-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .purchase-btn:hover {
+            background: #219150;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">IT Suite</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="ops.html">IT Operations</a></li>
+                <li><a href="projects.html">Project Management</a></li>
+                <li><a href="security.html">Cybersecurity</a></li>
+                <li><a href="ai-assistant.html">AI Assistant</a></li>
+                <li><a href="integrations.html">Professional Tools</a></li>
+                <li class="active"><a href="services.html">Services Marketplace</a></li>
+                <li><a href="funding.html">Sponsorship & Funding</a></li>
+            </ul>
+        </nav>
+    </div>
+    <main>
+        <header>
+            <h1>Managed IT Services & Solutions</h1>
+            <div class="user-profile">Admin User</div>
+        </header>
+
+        <section class="marketplace-intro">
+            <div class="stat-card full-width">
+                <h2>Monetize Complex IT Workflows</h2>
+                <p>Access high-end specialized services managed by our expert team. From AI optimization to enterprise security, we provide the tools and expertise to scale your operations.</p>
+            </div>
+        </section>
+
+        <div class="services-grid" id="servicesGrid">
+            <!-- Services will be loaded dynamically -->
+        </div>
+    </main>
+    <script src="js/main.js"></script>
+</body>
+</html>

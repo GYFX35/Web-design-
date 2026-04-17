@@ -79,6 +79,56 @@ async def get_google_info():
         "status": "Connected to Google Cloud API"
     }
 
+@app.get("/integrations/itsm")
+async def get_itsm_integrations():
+    return {
+        "integrations": [
+            {"name": "Jira Service Management", "status": "Active", "last_sync": "2023-10-27 12:00:00", "type": "ITSM"},
+            {"name": "Zendesk", "status": "Connected", "last_sync": "2023-10-27 11:45:00", "type": "Help Desk"},
+            {"name": "ServiceNow", "status": "Syncing", "last_sync": "2023-10-27 12:15:00", "type": "ITSM/Enterprise"},
+            {"name": "Slack IT Workflows", "status": "Active", "last_sync": "2023-10-27 12:30:00", "type": "Collaboration"}
+        ]
+    }
+
+@app.get("/services/premium")
+async def get_premium_services():
+    return {
+        "services": [
+            {
+                "id": "ai-opt-01",
+                "name": "AI Workflow Optimization",
+                "description": "Custom LangChain orchestration tailored for your specific business logic and token efficiency.",
+                "price": "$499",
+                "period": "one-time",
+                "category": "AI Development"
+            },
+            {
+                "id": "sec-audit-01",
+                "name": "Managed Security Audit",
+                "description": "Comprehensive vulnerability assessment, penetration testing, and compliance report (SOC2/GDPR).",
+                "price": "$1,200",
+                "period": "per audit",
+                "category": "Cybersecurity"
+            },
+            {
+                "id": "infra-auto-01",
+                "name": "Cloud Infrastructure Automation",
+                "description": "Full Terraform/Ansible setup for multi-cloud environments with auto-scaling and CI/CD.",
+                "price": "$250",
+                "period": "per month",
+                "category": "IT Operations"
+            },
+            {
+                "id": "247-support-01",
+                "name": "Elite 24/7 IT Support",
+                "description": "Dedicated response team with < 15 minute SLA for critical incidents and proactive monitoring.",
+                "price": "$800",
+                "period": "per month",
+                "category": "IT Support"
+            }
+        ]
+    }
+
 @app.post("/ask")
 async def ask(query: Query):
     try:
