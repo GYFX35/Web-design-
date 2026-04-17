@@ -202,8 +202,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const githubReposDiv = document.getElementById('githubRepos');
     const googleServicesDiv = document.getElementById('googleServices');
     const servicesGrid = document.getElementById('servicesGrid');
+    const opportunitiesList = document.getElementById('opportunitiesList');
+    const freelanceToolsList = document.getElementById('freelanceToolsList');
 
-    if (posTableBody || itsmTableBody || githubReposDiv || googleServicesDiv || servicesGrid) {
+    if (posTableBody || itsmTableBody || githubReposDiv || googleServicesDiv || servicesGrid || opportunitiesList || freelanceToolsList) {
         const fetchIntegrations = async () => {
             try {
                 // Fetch POS data
@@ -295,6 +297,57 @@ document.addEventListener('DOMContentLoaded', function() {
                             `;
                             servicesGrid.appendChild(card);
                         });
+                    }
+                }
+
+                // Fetch Freelance Tools data
+                if (freelanceToolsList) {
+                    const toolsResponse = await fetch('http://localhost:8000/freelance/tools');
+                    if (toolsResponse.ok) {
+                        const data = await toolsResponse.json();
+                        freelanceToolsList.innerHTML = '';
+                        data.tools.forEach(tool => {
+                            const card = document.createElement('div');
+                            card.className = 'tool-card';
+                            card.innerHTML = `
+                                <div class="category">${tool.category}</div>
+                                <h3>${tool.name}</h3>
+                                <p>${tool.description}</p>
+                                <a href="${tool.link}" class="btn-sponsor" style="display:inline-block; margin-top:10px;">Explore Tool</a>
+                            `;
+                            freelanceToolsList.appendChild(card);
+                        });
+                    }
+                }
+
+                // Fetch Opportunities data
+                if (opportunitiesList) {
+                    const oppsResponse = await fetch('http://localhost:8000/opportunities');
+                    if (oppsResponse.ok) {
+                        const data = await oppsResponse.json();
+                        opportunitiesList.innerHTML = '';
+                        data.opportunities.forEach(opp => {
+                            const card = document.createElement('div');
+                            card.className = 'opportunity-card';
+                            card.innerHTML = `
+                                <div class="meta">${opp.type} | ${opp.location}</div>
+                                <h3>${opp.role}</h3>
+                                <p>${opp.description}</p>
+                                <button class="purchase-btn" style="margin-top:10px; background:#3498db;" onclick="alert('Applying for ${opp.role}...')">View Details</button>
+                            `;
+                            opportunitiesList.appendChild(card);
+                        });
+
+                        // Update invitation banner if elements exist
+                        const invTitle = document.getElementById('invitationTitle');
+                        const invMsg = document.getElementById('invitationMessage');
+                        const applyBtn = document.getElementById('applyBtn');
+                        if (invTitle && data.invitation) invTitle.textContent = data.invitation.title;
+                        if (invMsg && data.invitation) invMsg.textContent = data.invitation.message;
+                        if (applyBtn && data.invitation) {
+                            applyBtn.textContent = data.invitation.cta;
+                            applyBtn.onclick = () => alert('Welcome! Redirecting to application portal...');
+                        }
                     }
                 }
             } catch (error) {
