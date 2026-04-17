@@ -129,6 +129,33 @@ async def get_premium_services():
         ]
     }
 
+@app.get("/freelance/tools")
+async def get_freelance_tools():
+    return {
+        "tools": [
+            {"id": "tool-01", "name": "TimeTracker Pro", "category": "Productivity", "description": "Automated time tracking and reporting for billable hours.", "link": "#"},
+            {"id": "tool-02", "name": "InvoiceGenius", "category": "Finance", "description": "Smart invoicing with multi-currency support and automated reminders.", "link": "#"},
+            {"id": "tool-03", "name": "ContractSafe", "category": "Legal", "description": "Template-based contract generation and secure e-signatures.", "link": "#"},
+            {"id": "tool-04", "name": "GlobalTax Helper", "category": "Finance", "description": "Assistance with international tax compliance for remote workers.", "link": "#"}
+        ]
+    }
+
+@app.get("/opportunities")
+async def get_opportunities():
+    return {
+        "opportunities": [
+            {"id": "opp-01", "role": "Senior Cloud Architect", "location": "Remote (Global)", "type": "Contract", "description": "Lead multi-cloud migration projects for enterprise clients."},
+            {"id": "opp-02", "role": "AI Workflow Engineer", "location": "Remote / London", "type": "Full-time", "description": "Design and implement custom LangChain orchestrations."},
+            {"id": "opp-03", "role": "Cybersecurity Consultant", "location": "Remote (EMEA)", "type": "Project-based", "description": "Perform comprehensive security audits and SOC2 compliance checks."},
+            {"id": "opp-04", "role": "DevOps Specialist", "location": "Remote (Americas)", "type": "Contract", "description": "Automate infrastructure using Terraform and Kubernetes."}
+        ],
+        "invitation": {
+            "title": "Join Our Global Expert Network",
+            "message": "We are always looking for talented IT professionals to join our growing ecosystem. Whether you're a freelancer looking for your next gig or an expert seeking a full-time role, we want to hear from you.",
+            "cta": "Apply to Join"
+        }
+    }
+
 @app.post("/ask")
 async def ask(query: Query):
     try:

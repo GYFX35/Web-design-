@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Network - IT Suite</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .network-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 20px;
+        }
+        .opportunity-card, .tool-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .opportunity-card h3, .tool-card h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        .opportunity-card .meta, .tool-card .category {
+            font-size: 14px;
+            color: #3498db;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .invitation-banner {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .invitation-banner h2 {
+            margin-bottom: 15px;
+        }
+        .invitation-banner p {
+            font-size: 18px;
+            margin-bottom: 25px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .apply-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .apply-btn:hover {
+            background: #219150;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">IT Suite</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="ops.html">IT Operations</a></li>
+                <li><a href="projects.html">Project Management</a></li>
+                <li><a href="security.html">Cybersecurity</a></li>
+                <li><a href="ai-assistant.html">AI Assistant</a></li>
+                <li><a href="integrations.html">Professional Tools</a></li>
+                <li><a href="services.html">Services Marketplace</a></li>
+                <li class="active"><a href="network.html">Global Network</a></li>
+                <li><a href="funding.html">Sponsorship & Funding</a></li>
+            </ul>
+        </nav>
+    </div>
+    <main>
+        <header>
+            <h1>Global IT Network & Opportunities</h1>
+            <div class="user-profile">Admin User</div>
+        </header>
+
+        <section id="invitationSection">
+            <!-- Invitation will be loaded dynamically -->
+             <div class="invitation-banner">
+                <h2 id="invitationTitle">Join Our Global Expert Network</h2>
+                <p id="invitationMessage">We are always looking for talented IT professionals to join our growing ecosystem.</p>
+                <button class="apply-btn" id="applyBtn">Apply to Join</button>
+             </div>
+        </section>
+
+        <div class="network-grid">
+            <section>
+                <h2>Global Opportunities</h2>
+                <div id="opportunitiesList" style="margin-top: 15px;">
+                    <!-- Data will be loaded dynamically -->
+                </div>
+            </section>
+            <section>
+                <h2>Freelance Tools</h2>
+                <div id="freelanceToolsList" style="margin-top: 15px;">
+                    <!-- Data will be loaded dynamically -->
+                </div>
+            </section>
+        </div>
+    </main>
+    <script src="js/main.js"></script>
+</body>
+</html>
