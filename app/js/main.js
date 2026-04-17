@@ -195,4 +195,70 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    // Integrations Page Logic
+    const posTableBody = document.querySelector('#posTable tbody');
+    const githubReposDiv = document.getElementById('githubRepos');
+    const googleServicesDiv = document.getElementById('googleServices');
+
+    if (posTableBody || githubReposDiv || googleServicesDiv) {
+        const fetchIntegrations = async () => {
+            try {
+                // Fetch POS data
+                const posResponse = await fetch('http://localhost:8000/integrations/pos');
+                if (posResponse.ok && posTableBody) {
+                    const data = await posResponse.json();
+                    posTableBody.innerHTML = '';
+                    data.integrations.forEach(item => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td><strong>${item.name}</strong></td>
+                            <td>${item.type}</td>
+                            <td><span class="status healthy">${item.status}</span></td>
+                            <td>${item.last_sync}</td>
+                        `;
+                        posTableBody.appendChild(row);
+                    });
+                }
+
+                // Fetch GitHub data
+                const githubResponse = await fetch('http://localhost:8000/integrations/github');
+                if (githubResponse.ok && githubReposDiv) {
+                    const data = await githubResponse.json();
+                    githubReposDiv.innerHTML = '';
+                    data.repositories.forEach(repo => {
+                        const div = document.createElement('div');
+                        div.className = 'kanban-card';
+                        div.innerHTML = `
+                            <strong>${repo.name}</strong><br>
+                            <small>⭐ ${repo.stars} | 🍴 ${repo.forks} | ❗ ${repo.open_issues} issues</small>
+                        `;
+                        githubReposDiv.appendChild(div);
+                    });
+                    document.getElementById('githubStatus').textContent = data.status;
+                }
+
+                // Fetch Google data
+                const googleResponse = await fetch('http://localhost:8000/integrations/google');
+                if (googleResponse.ok && googleServicesDiv) {
+                    const data = await googleResponse.json();
+                    googleServicesDiv.innerHTML = '';
+                    data.services.forEach(service => {
+                        const div = document.createElement('div');
+                        div.className = 'kanban-card';
+                        div.innerHTML = `
+                            <strong>${service.name}</strong><br>
+                            <small>Status: ${service.status} | ${service.storage_used || service.events_today + ' events today'}</small>
+                        `;
+                        googleServicesDiv.appendChild(div);
+                    });
+                    document.getElementById('googleStatus').textContent = data.status;
+                }
+            } catch (error) {
+                console.error('Error fetching integration data:', error);
+            }
+        };
+
+        fetchIntegrations();
+    }
 });
