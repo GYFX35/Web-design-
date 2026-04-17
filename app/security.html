@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity - IT Suite</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">IT Suite</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="ops.html">IT Operations</a></li>
+                <li><a href="projects.html">Project Management</a></li>
+                <li class="active"><a href="security.html">Cybersecurity</a></li>
+                <li><a href="ai-assistant.html">AI Assistant</a></li>
+            </ul>
+        </nav>
+    </div>
+    <main>
+        <header>
+            <h1>Cybersecurity Management</h1>
+            <div class="user-profile">Admin User</div>
+        </header>
+        <section class="stats-grid">
+            <div class="stat-card">
+                <h3>Threat Level</h3>
+                <div class="status healthy" id="threat-level">Low</div>
+                <p>No active attacks detected</p>
+            </div>
+            <div class="stat-card">
+                <h3>Vulnerabilities</h3>
+                <div class="number">4</div>
+                <p>2 Patchable, 2 Risk accepted</p>
+            </div>
+            <div class="stat-card">
+                <h3>Malware Blocked</h3>
+                <div class="number">127</div>
+                <p>Last 30 days</p>
+            </div>
+            <div class="stat-card">
+                <h3>Security Score</h3>
+                <div class="number">85%</div>
+                <p>Good compliance</p>
+            </div>
+        </section>
+
+        <section class="security-tools">
+            <div class="chart-container full-width">
+                <h3>Real-time Threat Detection</h3>
+                <canvas id="securityChart"></canvas>
+            </div>
+        </section>
+
+        <section class="ops-grid" style="margin-top: 20px;">
+            <div class="stat-card">
+                <h3>System Scan</h3>
+                <p>Last scan performed: 2 hours ago</p>
+                <button id="scanButton" class="action-button" style="margin-top: 10px; padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 4px; cursor: pointer;">Scan System Now</button>
+                <div id="scanStatus" style="margin-top: 10px; font-weight: bold;"></div>
+            </div>
+            <div class="stat-card">
+                <h3>Malware Prevention</h3>
+                <p>Real-time protection: <span style="color: #27ae60; font-weight: bold;">Active</span></p>
+                <p>Firewall status: <span style="color: #27ae60; font-weight: bold;">Secure</span></p>
+                <p>IDS/IPS: <span style="color: #27ae60; font-weight: bold;">Monitoring</span></p>
+            </div>
+        </section>
+
+        <section class="ops-grid" style="margin-top: 20px;">
+            <div class="stat-card full-width">
+                <h3>Recent Security Incidents</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Severity</th>
+                            <th>Description</th>
+                            <th>Timestamp</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>SEC-102</td>
+                            <td><span class="status healthy" style="background: #f39c12; color: white; padding: 2px 5px; border-radius: 3px;">Medium</span></td>
+                            <td>Brute force attempt on SSH</td>
+                            <td>2023-10-27 14:22</td>
+                            <td>Mitigated</td>
+                        </tr>
+                        <tr>
+                            <td>SEC-101</td>
+                            <td><span class="status healthy" style="background: #27ae60; color: white; padding: 2px 5px; border-radius: 3px;">Low</span></td>
+                            <td>Unauthorized port scan detected</td>
+                            <td>2023-10-27 09:15</td>
+                            <td>Blocked</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    <script src="js/main.js"></script>
+</body>
+</html>
