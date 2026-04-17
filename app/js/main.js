@@ -196,65 +196,159 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Integrations Page Logic
+    // Integrations & Freelance Page Logic
     const posTableBody = document.querySelector('#posTable tbody');
     const itsmTableBody = document.querySelector('#itsmTable tbody');
     const githubReposDiv = document.getElementById('githubRepos');
     const googleServicesDiv = document.getElementById('googleServices');
     const servicesGrid = document.getElementById('servicesGrid');
+    const opportunitiesList = document.getElementById('opportunitiesList');
+    const toolsList = document.getElementById('toolsList');
 
-    if (posTableBody || itsmTableBody || githubReposDiv || googleServicesDiv || servicesGrid) {
+    if (posTableBody || itsmTableBody || githubReposDiv || googleServicesDiv || servicesGrid || opportunitiesList || toolsList) {
         const fetchIntegrations = async () => {
             try {
+                // Fetch Freelance Opportunities
+                if (opportunitiesList) {
+                    const oppsResponse = await fetch('http://localhost:8000/freelance/opportunities');
+                    if (oppsResponse.ok) {
+                        const data = await oppsResponse.json();
+                        opportunitiesList.innerHTML = '';
+                        data.opportunities.forEach(opp => {
+                            const card = document.createElement('div');
+                            card.className = 'opportunity-card';
+
+                            const title = document.createElement('h3');
+                            title.textContent = opp.title;
+                            card.appendChild(title);
+
+                            const meta = document.createElement('div');
+                            meta.className = 'meta';
+                            meta.innerHTML = `<span>💰 ${opp.budget}</span> <span>⏳ ${opp.duration}</span>`;
+                            card.appendChild(meta);
+
+                            const desc = document.createElement('p');
+                            desc.textContent = opp.description;
+                            card.appendChild(desc);
+
+                            const skillsDiv = document.createElement('div');
+                            skillsDiv.className = 'skills';
+                            opp.skills.forEach(skill => {
+                                const tag = document.createElement('span');
+                                tag.className = 'skill-tag';
+                                tag.textContent = skill;
+                                skillsDiv.appendChild(tag);
+                            });
+                            card.appendChild(skillsDiv);
+
+                            const btn = document.createElement('button');
+                            btn.className = 'apply-btn';
+                            btn.textContent = 'Apply Now';
+                            btn.onclick = () => alert(`Application started for ${opp.title}`);
+                            card.appendChild(btn);
+
+                            opportunitiesList.appendChild(card);
+                        });
+                    }
+                }
+
+                // Fetch Freelance Tools
+                if (toolsList) {
+                    const toolsResponse = await fetch('http://localhost:8000/freelance/tools');
+                    if (toolsResponse.ok) {
+                        const data = await toolsResponse.json();
+                        toolsList.innerHTML = '';
+                        data.tools.forEach(tool => {
+                            const statusClass = tool.status.toLowerCase().includes('waitlist') ? 'status-waitlist' :
+                                               tool.status.toLowerCase().includes('beta') ? 'status-beta' :
+                                               tool.status.toLowerCase().includes('available') ? 'status-available' : 'status-active';
+                            const card = document.createElement('div');
+                            card.className = 'tool-card';
+
+                            const icon = document.createElement('div');
+                            icon.className = 'tool-icon';
+                            icon.textContent = tool.icon;
+                            card.appendChild(icon);
+
+                            const info = document.createElement('div');
+                            info.className = 'tool-info';
+
+                            const name = document.createElement('h4');
+                            name.textContent = tool.name;
+                            info.appendChild(name);
+
+                            const desc = document.createElement('p');
+                            desc.textContent = tool.description;
+                            info.appendChild(desc);
+
+                            const status = document.createElement('span');
+                            status.className = `tool-status ${statusClass}`;
+                            status.textContent = tool.status;
+                            info.appendChild(status);
+
+                            card.appendChild(info);
+                            toolsList.appendChild(card);
+                        });
+                    }
+                }
+
                 // Fetch POS data
-                const posResponse = await fetch('http://localhost:8000/integrations/pos');
-                if (posResponse.ok && posTableBody) {
-                    const data = await posResponse.json();
-                    posTableBody.innerHTML = '';
-                    data.integrations.forEach(item => {
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
-                            <td><strong>${item.name}</strong></td>
-                            <td>${item.type}</td>
-                            <td><span class="status healthy">${item.status}</span></td>
-                            <td>${item.last_sync}</td>
-                        `;
-                        posTableBody.appendChild(row);
-                    });
+                if (posTableBody) {
+                    const posResponse = await fetch('http://localhost:8000/integrations/pos');
+                    if (posResponse.ok) {
+                        const data = await posResponse.json();
+                        posTableBody.innerHTML = '';
+                        data.integrations.forEach(item => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td><strong></strong></td>
+                                <td></td>
+                                <td><span class="status healthy"></span></td>
+                                <td></td>
+                            `;
+                            row.cells[0].querySelector('strong').textContent = item.name;
+                            row.cells[1].textContent = item.type;
+                            row.cells[2].querySelector('span').textContent = item.status;
+                            row.cells[3].textContent = item.last_sync;
+                            posTableBody.appendChild(row);
+                        });
+                    }
                 }
 
                 // Fetch GitHub data
-                const githubResponse = await fetch('http://localhost:8000/integrations/github');
-                if (githubResponse.ok && githubReposDiv) {
-                    const data = await githubResponse.json();
-                    githubReposDiv.innerHTML = '';
-                    data.repositories.forEach(repo => {
-                        const div = document.createElement('div');
-                        div.className = 'kanban-card';
-                        div.innerHTML = `
-                            <strong>${repo.name}</strong><br>
-                            <small>⭐ ${repo.stars} | 🍴 ${repo.forks} | ❗ ${repo.open_issues} issues</small>
-                        `;
-                        githubReposDiv.appendChild(div);
-                    });
-                    document.getElementById('githubStatus').textContent = data.status;
+                if (githubReposDiv) {
+                    const githubResponse = await fetch('http://localhost:8000/integrations/github');
+                    if (githubResponse.ok) {
+                        const data = await githubResponse.json();
+                        githubReposDiv.innerHTML = '';
+                        data.repositories.forEach(repo => {
+                            const div = document.createElement('div');
+                            div.className = 'kanban-card';
+                            div.innerHTML = `<strong></strong><br><small></small>`;
+                            div.querySelector('strong').textContent = repo.name;
+                            div.querySelector('small').textContent = `⭐ ${repo.stars} | 🍴 ${repo.forks} | ❗ ${repo.open_issues} issues`;
+                            githubReposDiv.appendChild(div);
+                        });
+                        document.getElementById('githubStatus').textContent = data.status;
+                    }
                 }
 
                 // Fetch Google data
-                const googleResponse = await fetch('http://localhost:8000/integrations/google');
-                if (googleResponse.ok && googleServicesDiv) {
-                    const data = await googleResponse.json();
-                    googleServicesDiv.innerHTML = '';
-                    data.services.forEach(service => {
-                        const div = document.createElement('div');
-                        div.className = 'kanban-card';
-                        div.innerHTML = `
-                            <strong>${service.name}</strong><br>
-                            <small>Status: ${service.status} | ${service.storage_used || service.events_today + ' events today'}</small>
-                        `;
-                        googleServicesDiv.appendChild(div);
-                    });
-                    document.getElementById('googleStatus').textContent = data.status;
+                if (googleServicesDiv) {
+                    const googleResponse = await fetch('http://localhost:8000/integrations/google');
+                    if (googleResponse.ok) {
+                        const data = await googleResponse.json();
+                        googleServicesDiv.innerHTML = '';
+                        data.services.forEach(service => {
+                            const div = document.createElement('div');
+                            div.className = 'kanban-card';
+                            div.innerHTML = `<strong></strong><br><small></small>`;
+                            div.querySelector('strong').textContent = service.name;
+                            div.querySelector('small').textContent = `Status: ${service.status} | ${service.storage_used || service.events_today + ' events today'}`;
+                            googleServicesDiv.appendChild(div);
+                        });
+                        document.getElementById('googleStatus').textContent = data.status;
+                    }
                 }
 
                 // Fetch ITSM data
@@ -266,11 +360,15 @@ document.addEventListener('DOMContentLoaded', function() {
                         data.integrations.forEach(item => {
                             const row = document.createElement('tr');
                             row.innerHTML = `
-                                <td><strong>${item.name}</strong></td>
-                                <td>${item.type}</td>
-                                <td><span class="status healthy">${item.status}</span></td>
-                                <td>${item.last_sync}</td>
+                                <td><strong></strong></td>
+                                <td></td>
+                                <td><span class="status healthy"></span></td>
+                                <td></td>
                             `;
+                            row.cells[0].querySelector('strong').textContent = item.name;
+                            row.cells[1].textContent = item.type;
+                            row.cells[2].querySelector('span').textContent = item.status;
+                            row.cells[3].textContent = item.last_sync;
                             itsmTableBody.appendChild(row);
                         });
                     }
@@ -287,12 +385,19 @@ document.addEventListener('DOMContentLoaded', function() {
                             card.className = 'service-card';
                             card.innerHTML = `
                                 <div class="premium-badge">PREMIUM</div>
-                                <div class="category">${service.category}</div>
-                                <h3>${service.name}</h3>
-                                <p>${service.description}</p>
-                                <div class="price-tag">${service.price} <span>/ ${service.period}</span></div>
-                                <button class="purchase-btn" onclick="alert('Purchase flow for ${service.name} would start here.')">Get Started</button>
+                                <div class="category"></div>
+                                <h3></h3>
+                                <p></p>
+                                <div class="price-tag"><span></span></div>
+                                <button class="purchase-btn"></button>
                             `;
+                            card.querySelector('.category').textContent = service.category;
+                            card.querySelector('h3').textContent = service.name;
+                            card.querySelector('p').textContent = service.description;
+                            card.querySelector('.price-tag').prepend(document.createTextNode(service.price + ' '));
+                            card.querySelector('.price-tag span').textContent = `/ ${service.period}`;
+                            card.querySelector('.purchase-btn').textContent = 'Get Started';
+                            card.querySelector('.purchase-btn').onclick = () => alert(`Purchase flow for ${service.name} would start here.`);
                             servicesGrid.appendChild(card);
                         });
                     }

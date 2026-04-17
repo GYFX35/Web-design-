@@ -129,6 +129,76 @@ async def get_premium_services():
         ]
     }
 
+@app.get("/freelance/opportunities")
+async def get_freelance_opportunities():
+    return {
+        "opportunities": [
+            {
+                "id": "opp-01",
+                "title": "React Frontend Developer",
+                "description": "Build a responsive dashboard for a fintech client using Tailwind CSS and Chart.js.",
+                "budget": "$3,000 - $5,000",
+                "duration": "1 month",
+                "skills": ["React", "Tailwind", "Chart.js"]
+            },
+            {
+                "id": "opp-02",
+                "title": "Python Backend Engineer",
+                "description": "Develop FastAPI microservices for an AI-powered document processing platform.",
+                "budget": "$50 - $80 / hour",
+                "duration": "3 months",
+                "skills": ["Python", "FastAPI", "PostgreSQL", "Docker"]
+            },
+            {
+                "id": "opp-03",
+                "title": "Cybersecurity Consultant",
+                "description": "Perform security audits and penetration testing for a series of web applications.",
+                "budget": "$2,500 / audit",
+                "duration": "Ongoing",
+                "skills": ["Penetration Testing", "OWASP", "Security Auditing"]
+            },
+            {
+                "id": "opp-04",
+                "title": "DevOps Architect",
+                "description": "Setup CI/CD pipelines and Kubernetes clusters on AWS for a high-traffic e-commerce site.",
+                "budget": "$8,000 - $12,000",
+                "duration": "2 months",
+                "skills": ["AWS", "Kubernetes", "Terraform", "GitHub Actions"]
+            }
+        ]
+    }
+
+@app.get("/freelance/tools")
+async def get_freelance_tools():
+    return {
+        "tools": [
+            {
+                "name": "Global Time Tracker",
+                "description": "Track your billable hours across multiple time zones with automated reporting.",
+                "status": "Available",
+                "icon": "⏱️"
+            },
+            {
+                "name": "Smart Invoicing",
+                "description": "Generate professional invoices and track payments in multiple currencies.",
+                "status": "Beta",
+                "icon": "📄"
+            },
+            {
+                "name": "Collaboration Hub",
+                "description": "Secure workspace for project discussions, file sharing, and code reviews.",
+                "status": "Active",
+                "icon": "💬"
+            },
+            {
+                "name": "Skill Verification",
+                "description": "Get certified in key technologies and showcase your expertise to clients.",
+                "status": "Join Waitlist",
+                "icon": "✅"
+            }
+        ]
+    }
+
 @app.post("/ask")
 async def ask(query: Query):
     try:

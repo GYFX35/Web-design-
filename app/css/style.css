@@ -192,6 +192,120 @@ header {
     cursor: pointer;
 }
 
+/* Freelance Portal Specific Styles */
+.freelance-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.opportunity-card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    border-left: 5px solid #3498db;
+    transition: transform 0.2s;
+}
+
+.opportunity-card:hover {
+    transform: translateX(5px);
+}
+
+.opportunity-card h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.opportunity-card .meta {
+    font-size: 14px;
+    color: #7f8c8d;
+    margin-bottom: 15px;
+    display: flex;
+    gap: 20px;
+}
+
+.opportunity-card .skills {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.skill-tag {
+    background: #edf2f7;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    color: #2d3748;
+    font-weight: 600;
+}
+
+.apply-btn {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.apply-btn:hover {
+    background: #2980b9;
+}
+
+.tool-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.tool-icon {
+    font-size: 32px;
+    background: #f7fafc;
+    padding: 10px;
+    border-radius: 12px;
+}
+
+.tool-info h4 {
+    margin-bottom: 5px;
+    color: #2c3e50;
+    font-size: 16px;
+}
+
+.tool-info p {
+    font-size: 13px;
+    color: #7f8c8d;
+    line-height: 1.4;
+}
+
+.tool-status {
+    font-size: 10px;
+    text-transform: uppercase;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-top: 8px;
+    display: inline-block;
+    letter-spacing: 0.5px;
+}
+
+.status-available { background: #c6f6d5; color: #22543d; }
+.status-beta { background: #feebc8; color: #744210; }
+.status-active { background: #bee3f8; color: #2a4365; }
+.status-waitlist { background: #fed7d7; color: #822727; }
+
 /* Funding Page Styles */
 .progress-container {
     width: 100%;
