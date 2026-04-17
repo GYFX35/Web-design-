@@ -44,6 +44,41 @@ async def get_metrics():
         }
     }
 
+@app.get("/integrations/pos")
+async def get_pos_integrations():
+    return {
+        "integrations": [
+            {"name": "NCR", "status": "Connected", "last_sync": "2023-10-27 10:30:00", "type": "POS"},
+            {"name": "Revel Systems", "status": "Active", "last_sync": "2023-10-27 10:45:00", "type": "POS"},
+            {"name": "Lightspeed", "status": "Online", "last_sync": "2023-10-27 09:15:00", "type": "Retail/POS"},
+            {"name": "Square", "status": "Connected", "last_sync": "2023-10-27 11:00:00", "type": "POS/Payment"},
+            {"name": "Toast", "status": "Active", "last_sync": "2023-10-27 10:50:00", "type": "Restaurant/POS"},
+            {"name": "Shopline", "status": "Connected", "last_sync": "2023-10-27 11:10:00", "type": "E-commerce"}
+        ]
+    }
+
+@app.get("/integrations/github")
+async def get_github_info():
+    # In a real app, this would use PyGithub
+    return {
+        "repositories": [
+            {"name": "it-ops-suite", "stars": 125, "forks": 34, "open_issues": 5},
+            {"name": "ai-service-api", "stars": 89, "forks": 12, "open_issues": 2}
+        ],
+        "status": "Connected to GitHub API"
+    }
+
+@app.get("/integrations/google")
+async def get_google_info():
+    # In a real app, this would use google-api-python-client
+    return {
+        "services": [
+            {"name": "Google Drive", "status": "Linked", "storage_used": "1.2 GB"},
+            {"name": "Google Calendar", "status": "Synced", "events_today": 4}
+        ],
+        "status": "Connected to Google Cloud API"
+    }
+
 @app.post("/ask")
 async def ask(query: Query):
     try:

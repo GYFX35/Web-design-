@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Tools - IT Suite</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">IT Suite</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="ops.html">IT Operations</a></li>
+                <li><a href="projects.html">Project Management</a></li>
+                <li><a href="security.html">Cybersecurity</a></li>
+                <li><a href="ai-assistant.html">AI Assistant</a></li>
+                <li class="active"><a href="integrations.html">Professional Tools</a></li>
+                <li><a href="funding.html">Sponsorship & Funding</a></li>
+            </ul>
+        </nav>
+    </div>
+    <main>
+        <header>
+            <h1>Professional Tools & Integrations</h1>
+            <div class="user-profile">Admin User</div>
+        </header>
+
+        <section class="stats-grid">
+            <div class="stat-card">
+                <h3>POS Status</h3>
+                <div class="status healthy" id="posStatus">Connected</div>
+                <p>6 Active Integrations</p>
+            </div>
+            <div class="stat-card">
+                <h3>GitHub API</h3>
+                <div class="status healthy" id="githubStatus">Online</div>
+                <p>Real-time sync active</p>
+            </div>
+            <div class="stat-card">
+                <h3>Google API</h3>
+                <div class="status healthy" id="googleStatus">Online</div>
+                <p>Services linked</p>
+            </div>
+        </section>
+
+        <section class="ops-grid">
+            <div class="stat-card" style="margin-bottom: 20px;">
+                <h3>POS & E-commerce Integrations (NCR, Revel, Lightspeed, Square, Toast, Shopline)</h3>
+                <table id="posTable">
+                    <thead>
+                        <tr>
+                            <th>Tool Name</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                            <th>Last Sync</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data will be loaded dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="charts">
+            <div class="chart-container">
+                <h3>GitHub Repositories</h3>
+                <div id="githubRepos" style="margin-top: 15px;">
+                    <!-- Data will be loaded dynamically -->
+                </div>
+            </div>
+            <div class="chart-container">
+                <h3>Google Services</h3>
+                <div id="googleServices" style="margin-top: 15px;">
+                    <!-- Data will be loaded dynamically -->
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="js/main.js"></script>
+</body>
+</html>
