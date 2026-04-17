@@ -86,4 +86,113 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 4000);
         });
     }
+
+    // AI Assistant Chat Interaction
+    const chatInput = document.getElementById('chatInput');
+    const sendButton = document.getElementById('sendButton');
+    const chatMessages = document.getElementById('chatMessages');
+
+    if (sendButton && chatInput && chatMessages) {
+        const appendMessage = (text, sender) => {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', sender);
+            const bubbleDiv = document.createElement('div');
+            bubbleDiv.classList.add('chat-bubble');
+            bubbleDiv.textContent = text;
+            messageDiv.appendChild(bubbleDiv);
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        };
+
+        const handleSend = async () => {
+            const prompt = chatInput.value.trim();
+            if (!prompt) return;
+
+            appendMessage(prompt, 'user');
+            chatInput.value = '';
+
+            try {
+                const response = await fetch('http://localhost:8000/ask', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ prompt: prompt, provider: 'ollama' }),
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    appendMessage(data.response, 'ai');
+                } else {
+                    appendMessage('Error: Could not connect to the AI service.', 'ai');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                appendMessage('Error: Failed to fetch response from AI.', 'ai');
+            }
+        };
+
+        sendButton.addEventListener('click', handleSend);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleSend();
+        });
+    }
+
+    // Operations Page Dynamic Data
+    const serverTableBody = document.querySelector('#serverTable tbody');
+    if (serverTableBody) {
+        const fetchMetrics = async () => {
+            try {
+                const response = await fetch('http://localhost:8000/metrics');
+                if (response.ok) {
+                    const data = await response.json();
+                    serverTableBody.innerHTML = '';
+                    data.servers.forEach(server => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${server.host}</td>
+                            <td><span class="status healthy">${server.status}</span></td>
+                            <td>${server.cpu}</td>
+                            <td>${server.memory}</td>
+                            <td><span class="status healthy" style="color: ${server.security === 'Secure' ? '#27ae60' : '#e67e22'};">${server.security}</span></td>
+                        `;
+                        serverTableBody.appendChild(row);
+                    });
+                }
+            } catch (error) {
+                console.error('Error fetching metrics:', error);
+            }
+        };
+
+        fetchMetrics();
+        setInterval(fetchMetrics, 5000);
+    }
+
+    // Kanban Board Interaction
+    const addTaskButton = document.getElementById('addTaskButton');
+    const newTaskInput = document.getElementById('newTaskInput');
+    const todoColumn = document.getElementById('todoColumn');
+
+    if (addTaskButton && newTaskInput && todoColumn) {
+        addTaskButton.addEventListener('click', function() {
+            const taskText = newTaskInput.value.trim();
+            if (taskText) {
+                const card = document.createElement('div');
+                card.className = 'kanban-card';
+                card.textContent = taskText;
+
+                // Insert before the add-task div
+                const addTaskDiv = todoColumn.querySelector('.add-task');
+                todoColumn.insertBefore(card, addTaskDiv);
+
+                newTaskInput.value = '';
+            }
+        });
+
+        newTaskInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addTaskButton.click();
+            }
+        });
+    }
 });

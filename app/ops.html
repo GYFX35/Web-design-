@@ -27,7 +27,7 @@
         <section class="ops-grid">
             <div class="stat-card full-width">
                 <h3>Server Status</h3>
-                <table>
+                <table id="serverTable">
                     <thead>
                         <tr>
                             <th>Host</th>
@@ -35,38 +35,15 @@
                             <th>CPU</th>
                             <th>Memory</th>
                             <th>Security</th>
-                            <th>Last Seen</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>prod-db-01</td>
-                            <td><span class="status healthy">Online</span></td>
-                            <td>12%</td>
-                            <td>45%</td>
-                            <td><span class="status healthy" style="color: #27ae60;">Secure</span></td>
-                            <td>Just now</td>
-                        </tr>
-                        <tr>
-                            <td>web-app-primary</td>
-                            <td><span class="status healthy">Online</span></td>
-                            <td>25%</td>
-                            <td>60%</td>
-                            <td><span class="status healthy" style="color: #e67e22;">Warning</span></td>
-                            <td>Just now</td>
-                        </tr>
-                        <tr>
-                            <td>api-gateway-01</td>
-                            <td><span class="status healthy">Online</span></td>
-                            <td>8%</td>
-                            <td>30%</td>
-                            <td><span class="status healthy" style="color: #27ae60;">Secure</span></td>
-                            <td>Just now</td>
-                        </tr>
+                        <!-- Data will be loaded dynamically -->
                     </tbody>
                 </table>
             </div>
         </section>
     </main>
+    <script src="js/main.js"></script>
 </body>
 </html>
