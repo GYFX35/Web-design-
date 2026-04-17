@@ -192,6 +192,30 @@ header {
     cursor: pointer;
 }
 
+/* Accessibility & Global Features */
+.language-selector {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid #34495e;
+}
+
+.language-selector select {
+    width: 100%;
+    padding: 8px;
+    background-color: #34495e;
+    color: white;
+    border: 1px solid #455a64;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.currency-info {
+    font-size: 12px;
+    color: #7f8c8d;
+    margin-top: 5px;
+}
+
 /* Freelance Portal Specific Styles */
 .freelance-grid {
     display: grid;

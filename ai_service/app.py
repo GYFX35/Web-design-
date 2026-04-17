@@ -90,6 +90,28 @@ async def get_itsm_integrations():
         ]
     }
 
+@app.get("/integrations/marketing")
+async def get_marketing_integrations():
+    return {
+        "integrations": [
+            {"name": "Google Analytics 4", "status": "Connected", "last_sync": "2023-10-27 13:00:00", "type": "Analytics"},
+            {"name": "HubSpot CRM", "status": "Active", "last_sync": "2023-10-27 12:45:00", "type": "CRM/Marketing"},
+            {"name": "Mailchimp", "status": "Connected", "last_sync": "2023-10-27 11:30:00", "type": "Email Marketing"},
+            {"name": "SEMrush", "status": "Online", "last_sync": "2023-10-27 10:00:00", "type": "SEO/SEM"}
+        ]
+    }
+
+@app.get("/integrations/datascience")
+async def get_datascience_integrations():
+    return {
+        "integrations": [
+            {"name": "Google BigQuery", "status": "Connected", "last_sync": "2023-10-27 14:00:00", "type": "Data Warehouse"},
+            {"name": "MLflow", "status": "Active", "last_sync": "2023-10-27 13:45:00", "type": "ML Ops"},
+            {"name": "JupyterHub", "status": "Running", "last_sync": "2023-10-27 14:15:00", "type": "Notebooks"},
+            {"name": "Tableau Online", "status": "Synced", "last_sync": "2023-10-27 12:00:00", "type": "BI/Visualization"}
+        ]
+    }
+
 @app.get("/services/premium")
 async def get_premium_services():
     return {
