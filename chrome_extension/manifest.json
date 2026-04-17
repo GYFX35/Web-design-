@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "AI Ops Assistant",
+  "version": "1.0",
+  "description": "Enhance your IT Operations with AI capacity.",
+  "permissions": ["storage"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "host_permissions": ["http://localhost:8000/*"]
+}

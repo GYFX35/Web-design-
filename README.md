@@ -4,6 +4,12 @@ A comprehensive platform designed to bridge the gap between IT Operations and Pr
 
 ## 🚀 Key Features
 
+### 🤖 AI-Enhanced Capacity
+- **LangChain Integration**: Advanced LLM orchestration for automated problem solving.
+- **LangFlow**: Visual interface for designing AI workflows.
+- **Multi-Provider Support**: Switch between local (Ollama) and cloud (Google Gemini) AI models.
+- **Chrome Extension**: Direct access to AI assistance from your browser on any platform, including ChromeOS.
+
 ### 🛠 IT Operations Management
 - **System Monitoring**: Real-time tracking of server health, network performance, and application metrics.
 - **Incident Management**: Automated alerting and incident response workflows with escalation policies.
@@ -58,6 +64,18 @@ Navigate to ` /projects` to create new workspaces, manage backlogs, and start sp
 
 ## ⚙️ Configuration
 The application can be customized via the `config/` directory or environment variables. See [CONFIGURATION.md](docs/CONFIGURATION.md) for a full list of options.
+
+### 🤖 AI Service Setup
+1. Create a `.env` file in the root with your `GOOGLE_API_KEY`.
+2. Start the AI stack:
+   ```bash
+   docker-compose -f docker-compose.ai.yml up -d
+   ```
+3. The AI API will be available at `http://localhost:8000`.
+4. LangFlow will be available at `http://localhost:7860`.
+
+### 🌐 Chrome Extension
+Load the `chrome_extension/` directory into your browser as an unpacked extension to use the AI assistant.
 
 ## 🤝 Contributing
 We welcome contributions! Please see our [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to get started.
