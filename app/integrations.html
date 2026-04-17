@@ -20,6 +20,7 @@
                 <li><a href="services.html">Services Marketplace</a></li>
                 <li><a href="funding.html">Sponsorship & Funding</a></li>
                 <li><a href="freelance.html">Freelance Portal</a></li>
+                <li><a href="global-opportunities.html">Global Opportunities</a></li>
             </ul>
         </nav>
     </div>
@@ -45,9 +46,31 @@
                 <div class="status healthy" id="googleStatus">Online</div>
                 <p>Services linked</p>
             </div>
+            <div class="stat-card">
+                <h3>UN Agencies API</h3>
+                <div class="status healthy" id="unAgenciesStatus">Online</div>
+                <p>Integrated data source</p>
+            </div>
         </section>
 
         <section class="ops-grid">
+            <div class="stat-card" style="margin-bottom: 20px;">
+                <h3>International Development Agencies (World Bank, WHO, UNESCO, UNDP)</h3>
+                <table id="unAgenciesTable">
+                    <thead>
+                        <tr>
+                            <th>Agency</th>
+                            <th>Key Indicator</th>
+                            <th>Current Value</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data will be loaded dynamically -->
+                    </tbody>
+                </table>
+            </div>
+
             <div class="stat-card" style="margin-bottom: 20px;">
                 <h3>IT Support & ITSM Integrations (Jira, Zendesk, ServiceNow, Slack)</h3>
                 <table id="itsmTable">

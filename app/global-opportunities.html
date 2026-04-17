@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IT Operations - IT Suite</title>
+    <title>Global Opportunities - IT Suite</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -12,7 +12,7 @@
         <nav>
             <ul>
                 <li><a href="index.html">Dashboard</a></li>
-                <li class="active"><a href="ops.html">IT Operations</a></li>
+                <li><a href="ops.html">IT Operations</a></li>
                 <li><a href="projects.html">Project Management</a></li>
                 <li><a href="security.html">Cybersecurity</a></li>
                 <li><a href="ai-assistant.html">AI Assistant</a></li>
@@ -20,26 +20,37 @@
                 <li><a href="services.html">Services Marketplace</a></li>
                 <li><a href="funding.html">Sponsorship & Funding</a></li>
                 <li><a href="freelance.html">Freelance Portal</a></li>
-                <li><a href="global-opportunities.html">Global Opportunities</a></li>
+                <li class="active"><a href="global-opportunities.html">Global Opportunities</a></li>
             </ul>
         </nav>
     </div>
     <main>
         <header>
-            <h1>IT Operations Management</h1>
-            <div class="user-profile">Admin User</div>
+            <h1>International IT Programs & Development</h1>
+            <div class="user-profile">Global Impact Dashboard</div>
         </header>
-        <section class="ops-grid">
+
+        <section class="marketplace-intro">
             <div class="stat-card full-width">
-                <h3>Server Status</h3>
-                <table id="serverTable">
+                <h2>Empowering Through Technology</h2>
+                <p>Explore large-scale digital transformation initiatives, infrastructure projects, and capacity-building programs from leading international organizations including the World Bank, WHO, UNESCO, and UNDP.</p>
+            </div>
+        </section>
+
+        <div id="globalProgramsList" class="freelance-grid" style="grid-template-columns: 1fr 1fr;">
+            <!-- Loaded dynamically from js/main.js -->
+        </div>
+
+        <section style="margin-top: 40px;">
+            <h3>Agency Data Insights</h3>
+            <div class="stat-card" style="margin-top: 15px;">
+                <table id="unAgenciesTable">
                     <thead>
                         <tr>
-                            <th>Host</th>
+                            <th>Agency</th>
+                            <th>Key Indicator</th>
+                            <th>Current Value</th>
                             <th>Status</th>
-                            <th>CPU</th>
-                            <th>Memory</th>
-                            <th>Security</th>
                         </tr>
                     </thead>
                     <tbody>
