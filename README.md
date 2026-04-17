@@ -16,6 +16,12 @@ A comprehensive platform designed to bridge the gap between IT Operations and Pr
 - **Resource Allocation**: Visualize team capacity and manage workload across multiple projects.
 - **CI/CD Integration**: Direct links between project tasks and deployment pipelines.
 
+### 🤖 AI-Powered IT Assistant
+- **IT Support Automation**: Intelligent troubleshooting, automated ticket categorization, and instant resolution suggestions.
+- **Project Assistance & Management**: AI-driven sprint optimization, resource forecasting, and risk assessment for IT projects.
+- **Development Copilot**: Integrated assistance for code reviews, documentation generation, and IaC script optimization.
+- **Proactive Monitoring**: AI analysis of system logs to predict and prevent outages before they occur.
+
 ## 🏁 Getting Started
 
 ### Prerequisites
@@ -55,6 +61,9 @@ Access the ` /ops` route to view real-time system health. Configure alerts in th
 
 ### Project Planning
 Navigate to ` /projects` to create new workspaces, manage backlogs, and start sprints.
+
+### AI Assistant
+Access the integrated AI agent via the ` /ai-assistant` interface for real-time support, project insights, and automated task management.
 
 ## ⚙️ Configuration
 The application can be customized via the `config/` directory or environment variables. See [CONFIGURATION.md](docs/CONFIGURATION.md) for a full list of options.
