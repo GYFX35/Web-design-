@@ -22,6 +22,16 @@
                 <li><a href="freelance.html">Freelance Portal</a></li>
             </ul>
         </nav>
+        <div class="language-selector">
+            <select id="langSelect">
+                <option value="en">English (US)</option>
+                <option value="es">Español</option>
+                <option value="fr">Français</option>
+                <option value="de">Deutsch</option>
+                <option value="zh">中文</option>
+                <option value="ja">日本語</option>
+            </select>
+        </div>
     </div>
     <main>
         <header>
@@ -68,6 +78,40 @@
             <div class="stat-card" style="margin-bottom: 20px;">
                 <h3>POS & E-commerce Integrations (NCR, Revel, Lightspeed, Square, Toast, Shopline)</h3>
                 <table id="posTable">
+                    <thead>
+                        <tr>
+                            <th>Tool Name</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                            <th>Last Sync</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data will be loaded dynamically -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="stat-card" style="margin-bottom: 20px;">
+                <h3>Digital Marketing Integrations (GA4, HubSpot, Mailchimp, SEMrush)</h3>
+                <table id="marketingTable">
+                    <thead>
+                        <tr>
+                            <th>Tool Name</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                            <th>Last Sync</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data will be loaded dynamically -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="stat-card" style="margin-bottom: 20px;">
+                <h3>Data Science & ML Integrations (BigQuery, MLflow, Jupyter, Tableau)</h3>
+                <table id="datascienceTable">
                     <thead>
                         <tr>
                             <th>Tool Name</th>

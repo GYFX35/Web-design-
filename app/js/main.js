@@ -198,12 +198,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Integrations & Freelance Page Logic
     const posTableBody = document.querySelector('#posTable tbody');
+    const marketingTableBody = document.querySelector('#marketingTable tbody');
+    const datascienceTableBody = document.querySelector('#datascienceTable tbody');
     const itsmTableBody = document.querySelector('#itsmTable tbody');
     const githubReposDiv = document.getElementById('githubRepos');
     const googleServicesDiv = document.getElementById('googleServices');
     const servicesGrid = document.getElementById('servicesGrid');
     const opportunitiesList = document.getElementById('opportunitiesList');
     const toolsList = document.getElementById('toolsList');
+
+    // Language Selector Interaction
+    const langSelect = document.getElementById('langSelect');
+    if (langSelect) {
+        langSelect.addEventListener('change', function() {
+            const lang = langSelect.value;
+            // Simulated global accessibility: show alert for now
+            alert(`Interface language changed to: ${langSelect.options[langSelect.selectedIndex].text}`);
+            // In a real app, this would trigger an i18n reload
+        });
+    }
 
     if (posTableBody || itsmTableBody || githubReposDiv || googleServicesDiv || servicesGrid || opportunitiesList || toolsList) {
         const fetchIntegrations = async () => {
@@ -248,6 +261,52 @@ document.addEventListener('DOMContentLoaded', function() {
                             card.appendChild(btn);
 
                             opportunitiesList.appendChild(card);
+                        });
+                    }
+                }
+
+                // Fetch Marketing data
+                if (marketingTableBody) {
+                    const marketingResponse = await fetch('http://localhost:8000/integrations/marketing');
+                    if (marketingResponse.ok) {
+                        const data = await marketingResponse.json();
+                        marketingTableBody.innerHTML = '';
+                        data.integrations.forEach(item => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td><strong></strong></td>
+                                <td></td>
+                                <td><span class="status healthy"></span></td>
+                                <td></td>
+                            `;
+                            row.cells[0].querySelector('strong').textContent = item.name;
+                            row.cells[1].textContent = item.type;
+                            row.cells[2].querySelector('span').textContent = item.status;
+                            row.cells[3].textContent = item.last_sync;
+                            marketingTableBody.appendChild(row);
+                        });
+                    }
+                }
+
+                // Fetch Data Science data
+                if (datascienceTableBody) {
+                    const dsResponse = await fetch('http://localhost:8000/integrations/datascience');
+                    if (dsResponse.ok) {
+                        const data = await dsResponse.json();
+                        datascienceTableBody.innerHTML = '';
+                        data.integrations.forEach(item => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td><strong></strong></td>
+                                <td></td>
+                                <td><span class="status healthy"></span></td>
+                                <td></td>
+                            `;
+                            row.cells[0].querySelector('strong').textContent = item.name;
+                            row.cells[1].textContent = item.type;
+                            row.cells[2].querySelector('span').textContent = item.status;
+                            row.cells[3].textContent = item.last_sync;
+                            datascienceTableBody.appendChild(row);
                         });
                     }
                 }
@@ -396,6 +455,12 @@ document.addEventListener('DOMContentLoaded', function() {
                             card.querySelector('p').textContent = service.description;
                             card.querySelector('.price-tag').prepend(document.createTextNode(service.price + ' '));
                             card.querySelector('.price-tag span').textContent = `/ ${service.period}`;
+
+                            const currencyInfo = document.createElement('div');
+                            currencyInfo.className = 'currency-info';
+                            currencyInfo.textContent = 'Global pricing: USD, EUR, GBP, JPY accepted';
+                            card.appendChild(currencyInfo);
+
                             card.querySelector('.purchase-btn').textContent = 'Get Started';
                             card.querySelector('.purchase-btn').onclick = () => alert(`Purchase flow for ${service.name} would start here.`);
                             servicesGrid.appendChild(card);
