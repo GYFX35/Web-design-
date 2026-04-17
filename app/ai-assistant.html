@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Assistant - IT Suite</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">IT Suite</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="ops.html">IT Operations</a></li>
+                <li><a href="projects.html">Project Management</a></li>
+                <li class="active"><a href="ai-assistant.html">AI Assistant</a></li>
+            </ul>
+        </nav>
+    </div>
+    <main>
+        <header>
+            <h1>AI Assistant</h1>
+            <div class="user-profile">Admin User</div>
+        </header>
+        <div class="ai-container">
+            <div class="chat-messages" id="chatMessages">
+                <div class="message ai">
+                    <div class="chat-bubble">
+                        Hello! I am your AI IT Assistant. How can I help you today?
+                        <br><br>
+                        I can help with:
+                        <ul>
+                            <li>Troubleshooting system issues</li>
+                            <li>Analyzing sprint velocity</li>
+                            <li>Optimizing Terraform scripts</li>
+                            <li>Generating project status reports</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="message user">
+                    <div class="chat-bubble">Can you analyze the current sprint progress?</div>
+                </div>
+                <div class="message ai">
+                    <div class="chat-bubble">
+                        Based on current data:
+                        <br>- Sprint 24 is 65% complete.
+                        <br>- Velocity is slightly higher than Sprint 23.
+                        <br>- Warning: 2 high-priority tasks in the backlog haven't been assigned.
+                        <br>- Recommendation: Reallocate resources from Task #402 to help with the Database Migration.
+                    </div>
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" placeholder="Ask me anything about your IT operations or projects...">
+                <button>Send</button>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

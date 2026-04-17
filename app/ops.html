@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Operations - IT Suite</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">IT Suite</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Dashboard</a></li>
+                <li class="active"><a href="ops.html">IT Operations</a></li>
+                <li><a href="projects.html">Project Management</a></li>
+                <li><a href="ai-assistant.html">AI Assistant</a></li>
+            </ul>
+        </nav>
+    </div>
+    <main>
+        <header>
+            <h1>IT Operations Management</h1>
+            <div class="user-profile">Admin User</div>
+        </header>
+        <section class="ops-grid">
+            <div class="stat-card full-width">
+                <h3>Server Status</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Host</th>
+                            <th>Status</th>
+                            <th>CPU</th>
+                            <th>Memory</th>
+                            <th>Last Seen</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>prod-db-01</td>
+                            <td><span class="status healthy">Online</span></td>
+                            <td>12%</td>
+                            <td>45%</td>
+                            <td>Just now</td>
+                        </tr>
+                        <tr>
+                            <td>web-app-primary</td>
+                            <td><span class="status healthy">Online</span></td>
+                            <td>25%</td>
+                            <td>60%</td>
+                            <td>Just now</td>
+                        </tr>
+                        <tr>
+                            <td>api-gateway-01</td>
+                            <td><span class="status healthy">Online</span></td>
+                            <td>8%</td>
+                            <td>30%</td>
+                            <td>Just now</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

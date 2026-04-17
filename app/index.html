@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Ops & Project Suite - Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">IT Suite</div>
+        <nav>
+            <ul>
+                <li class="active"><a href="index.html">Dashboard</a></li>
+                <li><a href="ops.html">IT Operations</a></li>
+                <li><a href="projects.html">Project Management</a></li>
+                <li><a href="ai-assistant.html">AI Assistant</a></li>
+            </ul>
+        </nav>
+    </div>
+    <main>
+        <header>
+            <h1>Dashboard Overview</h1>
+            <div class="user-profile">Admin User</div>
+        </header>
+        <section class="stats-grid">
+            <div class="stat-card">
+                <h3>System Health</h3>
+                <div class="status healthy">Healthy</div>
+                <p>99.9% Uptime</p>
+            </div>
+            <div class="stat-card">
+                <h3>Active Projects</h3>
+                <div class="number">12</div>
+                <p>4 Sprints in progress</p>
+            </div>
+            <div class="stat-card">
+                <h3>Open Incidents</h3>
+                <div class="number">2</div>
+                <p>1 Critical, 1 Major</p>
+            </div>
+            <div class="stat-card">
+                <h3>AI Insights</h3>
+                <p>3 Recommendations available</p>
+            </div>
+        </section>
+        <section class="charts">
+            <div class="chart-container">
+                <canvas id="trafficChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="sprintProgressChart"></canvas>
+            </div>
+        </section>
+    </main>
+    <script src="js/main.js"></script>
+</body>
+</html>
