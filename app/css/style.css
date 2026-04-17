@@ -239,3 +239,25 @@ th {
     margin-bottom: 10px;
     cursor: move;
 }
+
+.add-task {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.add-task input {
+    flex: 1;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.add-task button {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
